@@ -1,0 +1,95 @@
+*simple-syntax-formatting.txt* A simple wrapper for formatting files.
+
+                     _                 _              __                _    ~
+ ___ _ __ ___  _ __ | |      ___ _   _| |___  __     / _|_ __ _ __ ___ | |_  ~
+/ __| '_ ` _ \| '_ \| |_____/ __| | | | __\ \/ /____| |_| '__| '_ ` _ \| __| ~
+\__ \ | | | | | |_) | |_____\__ \ |_| | |_ >  <_____|  _| |  | | | | | | |_  ~
+|___/_| |_| |_| .__/|_|     |___/\__, |\__/_/\_\    |_| |_|  |_| |_| |_|\__| ~
+              |_|                |___/                                       ~
+
+=============================================================================
+CONTENTS                                            *SSFContents*
+
+  1. Purpose ......................... |SSFPurpose|
+  2. Setup ........................... |SSFSetup|
+  3. Using ........................... |SSFUsing|
+  4. Limitations and Known Issues .... |SSFLimitations|
+
+=============================================================================
+Section 1: Purpose                                  *SSFPurpose*
+
+This plugin (simple-syntax-formatting, abbreviated to SSF) is intended to be a
+very simple wrapper for vim's built-in 'formatexpr' and 'formatprg' options,
+to provide easy-to-use integration with external formatting tools, such as
+code formatters. I developed it for two reasons:
+
+  1. 'formatprg' does not provide an easy way to handle dynamic changes to the
+  command line before invoking external tools. I tend to use plugins like
+  vim-localrc (https://github.com/thinca/vim-localrc) and vim-sleuth
+  (https://github.com/tpope/vim-sleuth), which will dynamically adjust
+  'shiftwidth', 'textwidth', etc. on a file-by-file basis. SSF instead allows
+  for placeholder values to be stored in its equivalent setting, which are
+  dynamically replaced when formatting is performed.  These formatters need
+  those values to format correctly.
+
+  2. Other formatting plugins (e.g. Neoformat
+  (https://github.com/sbdchd/neoformat)) introduce new commands for
+  formatting. SSF, because it integrates with vim's 'formatexpr' setting,
+  works cleanly with standard vim keymaps like 'gq{motion}'.
+
+=============================================================================
+Section 2: Setup                                    *SSFSetup*
+
+  1. Install SSF using any standard vim plugin manager
+  (https://vi.stackexchange.com/q/388/91).
+
+  2. Set `b:syntax_format_command` in
+  `~/.vim/after/ftplugin/yourfiletype.vim`. For example, I set this in
+  `~/.vim/after/ftplugin/yaml.vim`:
+
+  `let b:syntax_format_command='prettier --stdin --parser yaml --print-width ${TEXTWIDTH} --tab-width ${SHIFTWIDTH}'`
+
+  Note that the special values `${TEXTWIDTH}`, `${SHIFTWIDTH}`, and
+  `${TABSTOP}` are dynamically replaced with the current values of
+  'textwidth', 'shiftwidth', and 'tabstop' for the buffer at the time of
+  invoking the formatting. (They are designed to be reminiscent of shell
+  environment variable syntax but they are not environment variables). In my
+  experience, generally `${TABSTOP}` is not needed, but it is provided for
+  completeness.
+
+=============================================================================
+Section 3: Using                                    *SSFUsing*
+
+Simply use the standard vim key mappings 'gq{motion}', 'gqgq', '{Visual}gq'
+and so on.
+
+SSF also introduces a new key mapping 'gQ'. This is a shortcut to format the
+entire buffer (equivalent to 'gggQG', but it does not move the cursor).
+
+If you try to use these key mappings in a buffer where you have not configured
+`b:syntax_format_command`, you will see a warning message instead.
+
+=============================================================================
+Section 4: Limitations and Known Issues             *SSFLimitations*
+
+  1. SSF will not work to continuously format paragraphs whilst they being typed
+  as described in the help for 'formatexpr'. It will always return a non-zero
+  code if |mode()| does not equal 'n', which means that vim will use it's own
+  internal formatting in that circumstance.
+
+  2. For code formatting, because you have most likely overriden vim's internal
+  paragraph formatting by setting `b:syntax_format_command`, you will not be
+  able to (for example) format paragraphs of text inside comments. Instead, you
+  should use vim's built in 'gw{motion}' key mappings, which specifically do not
+  use 'formatexpr' and hence do not trigger SSF.
+
+  3. The 'gQ' keymap cannot be easily disabled.
+
+  4. SSF sets 'formatexpr' to its own value. If you override or disable this
+  globally or locally for a filetype, you cannot use SSF in that context.
+
+  5. SSF does not provide any formatter configuration out-of-the-box. You need
+  to configure appropriate formatters for you.
+
+==============================================================================
+vim:tw=78:sw=2:ts=4:ft=help:norl:nowrap:
