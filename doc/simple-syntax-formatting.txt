@@ -64,8 +64,14 @@ Section 3: Using                                    *SSFUsing*
 Simply use the standard vim key mappings 'gq{motion}', 'gqgq', '{Visual}gq'
 and so on.
 
-SSF also introduces a new key mapping 'gQ'. This is a shortcut to format the
-entire buffer (equivalent to 'gggQG', but it does not move the cursor).
+SSF also introduces a plugin for a key mapping to format the entire buffer
+(equivalent to 'gggQG', but it does not move the cursor). This is a very
+common operation, so you may find it useful to map it to a key mapping,
+although it is not mapped by default. I find 'gQ' is a useful keybinding, as I
+don't really use that, so if you want to map it, please add something similar
+to this to your `~/.vimrc` or NeoVim equivalent:
+
+  nmap gQ <Plug>SSFFormatWholeBuffer
 
 If you try to use these key mappings in a buffer where you have not configured
 `b:syntax_format_command`, you will see a warning message instead.
@@ -84,12 +90,10 @@ Section 4: Limitations and Known Issues             *SSFLimitations*
   should use vim's built in 'gw{motion}' key mappings, which specifically do not
   use 'formatexpr' and hence do not trigger SSF.
 
-  3. The 'gQ' keymap cannot be easily disabled.
-
-  4. SSF sets 'formatexpr' to its own value. If you override or disable this
+  3. SSF sets 'formatexpr' to its own value. If you override or disable this
   globally or locally for a filetype, you cannot use SSF in that context.
 
-  5. SSF does not provide any formatter configuration out-of-the-box. You need
+  4. SSF does not provide any formatter configuration out-of-the-box. You need
   to configure appropriate formatters for you.
 
 ==============================================================================
