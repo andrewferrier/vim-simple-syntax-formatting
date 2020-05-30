@@ -58,6 +58,9 @@ Section 2: Setup                                    *SSFSetup*
   experience, generally `${TABSTOP}` is not needed, but it is provided for
   completeness.
 
+  The formatter must accept text to be formatted on stdin and produce
+  formatted output on stdout.
+
 =============================================================================
 Section 3: Using                                    *SSFUsing*
 
@@ -95,6 +98,9 @@ Section 4: Limitations and Known Issues             *SSFLimitations*
 
   4. SSF does not provide any formatter configuration out-of-the-box. You need
   to configure appropriate formatters for you.
+
+  5. The formatter must accept text to be formatted on stdin and produce
+  formatted output on stdout.
 
 ==============================================================================
 vim:tw=78:sw=2:ts=4:ft=help:norl:nowrap:
