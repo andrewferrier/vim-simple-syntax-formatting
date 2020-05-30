@@ -29,13 +29,20 @@ code formatters. I developed it for two reasons:
   (https://github.com/tpope/vim-sleuth), which will dynamically adjust
   'shiftwidth', 'textwidth', etc. on a file-by-file basis. SSF instead allows
   for placeholder values to be stored in its equivalent setting, which are
-  dynamically replaced when formatting is performed.  These formatters need
-  those values to format correctly.
+  dynamically replaced when formatting is performed. These formatters need
+  those values to format correctly. This also helps in the case where you
+  manually set 'shiftwidth' etc. on the command line because you deliberately
+  want to change the indenting of an entire file.
 
   2. Other formatting plugins (e.g. Neoformat
   (https://github.com/sbdchd/neoformat)) introduce new commands for
   formatting. SSF, because it integrates with vim's 'formatexpr' setting,
   works cleanly with standard vim keymaps like 'gq{motion}'.
+
+*Warning*: If the reasons above don't apply to use, probably using this plugin
+is unnecessary and will just overcomplicate your setup. In that case I
+recommend simply setting 'formatprg' directly in
+`~/.vim/after/ftplugin/yourfiletype.vim` instead.
 
 =============================================================================
 Section 2: Setup                                    *SSFSetup*
