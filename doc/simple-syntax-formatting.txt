@@ -41,7 +41,8 @@ code formatters. I developed it for two reasons:
 Section 2: Setup                                    *SSFSetup*
 
   1. Install SSF using any standard vim plugin manager
-  (https://vi.stackexchange.com/q/388/91).
+  (https://vi.stackexchange.com/q/388/91). This plugin has been tested with
+  Vim 8.0+ and NeoVim 0.4.3+.
 
   2. Set `b:syntax_format_command` in
   `~/.vim/after/ftplugin/yourfiletype.vim`. For example, I set this in
