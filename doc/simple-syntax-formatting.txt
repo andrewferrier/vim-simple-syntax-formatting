@@ -68,7 +68,7 @@ Simply use the standard vim key mappings 'gq{motion}', 'gqgq', '{Visual}gq'
 and so on.
 
 SSF also introduces a plugin for a key mapping to format the entire buffer
-(equivalent to 'gggQG', but it does not move the cursor). This is a very
+(equivalent to 'gggqG', but it does not move the cursor). This is a very
 common operation, so you may find it useful to map it to a key mapping,
 although it is not mapped by default. I find 'gQ' is a useful keybinding, as I
 don't really use that, so if you want to map it, please add something similar
