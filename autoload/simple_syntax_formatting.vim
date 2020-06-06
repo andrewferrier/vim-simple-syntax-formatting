@@ -43,14 +43,16 @@ function! simple_syntax_formatting#FormatRange(start_line, end_line) abort
             let l:stdout = systemlist(l:formatter_command, l:stdin)
 
             if v:shell_error == 0
+                let l:number_of_lines = a:end_line - a:start_line + 1
+
                 if l:stdin !=# l:stdout
                     call s:replacelines(a:start_line, a:end_line, l:stdout)
-                    echomsg 'Formatted.'
+                    echomsg 'Formatted ' . l:number_of_lines . ' lines.'
                     if exists('*gitgutter#process_buffer')
                         call gitgutter#process_buffer(bufnr(''), 1)
                     endif
                 else
-                    echomsg 'No change necessary for format.'
+                    echomsg 'No change necessary when formatting ' . l:number_of_lines . ' lines.'
                 endif
             else
                 echohl ErrorMsg | echomsg 'Formatter "' . l:formatter_command . '" failed to run.' | echohl None
