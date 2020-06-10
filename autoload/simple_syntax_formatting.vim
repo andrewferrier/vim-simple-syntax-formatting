@@ -47,7 +47,7 @@ function! simple_syntax_formatting#FormatRange(start_line, end_line) abort
 
                 if l:stdin !=# l:stdout
                     call s:replacelines(a:start_line, a:end_line, l:stdout)
-                    echomsg 'Formatted ' . l:number_of_lines . ' lines.'
+                    echomsg 'Formatted ' . l:number_of_lines . ' lines using "' . l:formatter_command . '".'
                     if exists('*gitgutter#process_buffer')
                         call gitgutter#process_buffer(bufnr(''), 1)
                     endif
