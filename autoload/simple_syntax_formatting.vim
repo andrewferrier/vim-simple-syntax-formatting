@@ -40,7 +40,13 @@ function! simple_syntax_formatting#FormatRange(start_line, end_line) abort
             let l:view = winsaveview()
 
             let l:stdin = getbufline(bufnr('%'), a:start_line, a:end_line)
-            let l:stdout = systemlist(l:formatter_command, l:stdin)
+            if exists('b:syntax_format_cannotstdin') && b:syntax_format_cannotstdin == 1
+                let l:tempname = tempname()
+                call writefile(l:stdin, l:tempname)
+                let l:stdout = systemlist(l:formatter_command . ' ' . l:tempname)
+            else
+                let l:stdout = systemlist(l:formatter_command, l:stdin)
+            endif
 
             if v:shell_error == 0
                 let l:number_of_lines = a:end_line - a:start_line + 1

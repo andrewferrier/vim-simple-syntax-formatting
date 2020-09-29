@@ -66,7 +66,8 @@ Section 2: Setup                                    *SSFSetup*
   completeness.
 
   The formatter must accept text to be formatted on stdin and produce
-  formatted output on stdout.
+  formatted output on stdout. If it cannot accept text on stdin, but a
+  temporary file is needed, set b:syntax_format_cannotstdin to 1.
 
 =============================================================================
 Section 3: Using                                    *SSFUsing*
