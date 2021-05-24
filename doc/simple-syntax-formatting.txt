@@ -39,7 +39,7 @@ code formatters. I developed it for two reasons:
   formatting. SSF, because it integrates with vim's 'formatexpr' setting,
   works cleanly with standard vim keymaps like 'gq{motion}'.
 
-*Warning*: If the reasons above don't apply to use, probably using this plugin
+*Warning*: If the reasons above don't apply to you, probably using this plugin
 is unnecessary and will just overcomplicate your setup. In that case I
 recommend simply setting 'formatprg' directly in
 `~/.vim/after/ftplugin/yourfiletype.vim` instead.
