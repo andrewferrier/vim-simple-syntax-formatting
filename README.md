@@ -1,5 +1,7 @@
 # Simple Syntax Formatter
 
+***ARCHIVED: I AM NO LONGER MAINTAINING THIS PLUGIN, AS I'VE NOW SWITCHED TO SOME SEMI-CUSTOM LOGIC USING [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim) INSTEAD. I'M LEAVING THIS REPOSITORY HERE FOR OTHERS WHO MAY WISH TO USE IT.***
+
 This plugin is intended to be a very simple wrapper for vim's built-in
 `formatexpr` and `formatprg` options, to provide easy-to-use integration with
 external formatting tools, such as code formatters. It more straightforwardly
